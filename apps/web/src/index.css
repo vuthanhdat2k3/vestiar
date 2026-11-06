@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #070709;
+  color: #ffffff;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* iPhone Safari safe area handling */
+header {
+  padding-top: max(env(safe-area-inset-top), 0.75rem);
+}
+
+footer {
+  padding-bottom: max(env(safe-area-inset-bottom), 1.25rem);
+}
+
+/* Prevent unwanted mobile text selection or callouts */
+* {
+  -webkit-touch-callout: none;
+}
