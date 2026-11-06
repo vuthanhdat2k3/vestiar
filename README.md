@@ -71,19 +71,26 @@ vestiar/
 ├── packages/
 │   └── tryon-engine/                       # Core virtual try-on engine
 │       └── src/
-│           └── camera/camera-source.ts     # Video source contract for MediaPipe
+│           ├── camera/camera-source.ts     # Video source contract for MediaPipe
+│           └── tracking/                   # MediaPipe Pose Landmarker & Body Measurements
+│               ├── pose-landmarker.service.ts
+│               ├── pose-tracking.pipeline.ts
+│               ├── measurements.ts
+│               └── types.ts
 ├── docs/
 │   └── development/
-│       └── iphone-camera-setup.md          # Comprehensive iOS Safari setup guide
+│       ├── iphone-camera-setup.md          # Comprehensive iOS Safari setup guide
+│       └── mediapipe-body-tracking.md      # Real-time MediaPipe Pose Tracking guide
 └── scripts/
-    └── setup-https.ps1                     # PowerShell HTTPS certificate setup script
+    ├── setup-https.ps1                     # PowerShell HTTPS certificate setup script
+    └── download-models.ps1                 # Local MediaPipe model & WASM setup script
 ```
 
 ---
 
 ## Automated Tests
 
-Run the full Vitest suite:
+Run the full Vitest suite (all packages):
 ```powershell
 pnpm test
 ```
@@ -100,8 +107,8 @@ pnpm build
 
 ---
 
-## Roadmap & Next Milestones
+## Roadmap & Progress
 
-1. **Camera Integration (Completed)**: Native iOS Safari browser camera access over HTTPS.
-2. **MediaPipe Tracking**: Integrate MediaPipe Pose Landmarker and Selfie Segmenter using the video stream reference.
-3. **Three.js Virtual Garments**: 3D garment mesh deformation and physics overlay.
+1. **Camera Integration (Completed)**: Native iOS Safari browser camera access over local HTTPS with QR Code quick connect.
+2. **MediaPipe Tracking (Completed)**: Real-time 33-landmark body pose estimation, torso bounding zone, skeleton overlay, and structural fitting measurements.
+3. **Three.js Virtual Garments (Next Milestone)**: 3D garment mesh deformation, rigging to keypoints, and physics overlay.

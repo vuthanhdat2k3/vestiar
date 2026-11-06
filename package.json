@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "pnpm --filter @vestiar/web dev",
     "build": "pnpm --filter @vestiar/web build",
-    "test": "pnpm --filter @vestiar/web test:run",
+    "test": "pnpm -r run test:run",
     "test:watch": "pnpm --filter @vestiar/web test",
-    "setup:https": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-https.ps1"
+    "setup:https": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-https.ps1",
+    "models:download": "powershell -ExecutionPolicy Bypass -File ./scripts/download-models.ps1"
   },
   "packageManager": "pnpm@11.24.0"
 }

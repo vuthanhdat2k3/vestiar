@@ -1,5 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import { useCamera, UseCameraOptions } from '../hooks/useCamera';
+import { CameraStatus as CameraStatusType, FacingMode } from '../types/camera.types';
 import { CameraControls } from './CameraControls';
 import { CameraStatus } from './CameraStatus';
 import { QRCodeModal } from './QRCodeModal';
@@ -13,13 +14,33 @@ import {
   QrCode,
 } from 'lucide-react';
 
+export interface CameraPreviewRenderProps {
+  videoElement: HTMLVideoElement | null;
+  fitMode: 'cover' | 'contain';
+  facingMode: FacingMode;
+  status: CameraStatusType;
+}
+
 export interface CameraPreviewProps extends UseCameraOptions {
   className?: string;
   onVideoRefReady?: (video: HTMLVideoElement | null) => void;
+  headerSlot?: React.ReactNode;
+  children?: React.ReactNode | ((props: CameraPreviewRenderProps) => React.ReactNode);
 }
 
 export const CameraPreview = forwardRef<HTMLVideoElement, CameraPreviewProps>(
-  ({ className = '', autoStart = false, defaultFacingMode = 'environment', onFrame, onVideoRefReady }, forwardedRef) => {
+  (
+    {
+      className = '',
+      autoStart = false,
+      defaultFacingMode = 'environment',
+      onFrame,
+      onVideoRefReady,
+      headerSlot,
+      children,
+    },
+    forwardedRef
+  ) => {
     const [fitMode, setFitMode] = useState<'cover' | 'contain'>('cover');
     const [showHelp, setShowHelp] = useState(false);
     const [showQrModal, setShowQrModal] = useState(false);
@@ -91,6 +112,8 @@ export const CameraPreview = forwardRef<HTMLVideoElement, CameraPreviewProps>(
             isSecureContext={isSecureContext}
           />
 
+          {headerSlot}
+
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -132,6 +155,17 @@ export const CameraPreview = forwardRef<HTMLVideoElement, CameraPreviewProps>(
               status === 'running' ? 'opacity-100' : 'opacity-0'
             }`}
           />
+
+          {/* Custom Overlays (e.g. MediaPipe Tracking Overlay) */}
+          {status === 'running' &&
+            (typeof children === 'function'
+              ? children({
+                  videoElement: videoRef.current,
+                  fitMode,
+                  facingMode,
+                  status,
+                })
+              : children)}
 
           {/* AR Fitting Reticles & Frame Guides (Visible when camera is active) */}
           {status === 'running' && (

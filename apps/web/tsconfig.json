@@ -17,8 +17,10 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@vestiar/tryon-engine": ["../../packages/tryon-engine/src"],
+      "@vestiar/tryon-engine/*": ["../../packages/tryon-engine/src/*"]
     }
   },
-  "include": ["src", "vite.config.ts", "vitest.config.ts"]
+  "include": ["src", "vite.config.ts", "vitest.config.ts", "../../packages/tryon-engine/src/**/*"]
 }

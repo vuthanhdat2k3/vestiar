@@ -11,6 +11,8 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@mediapipe/tasks-vision": "^1.2.2",
+    "@vestiar/tryon-engine": "workspace:*",
     "lucide-react": "^1.16.0",
     "qrcode": "^1.5.4",
     "react": "^19.0.0",

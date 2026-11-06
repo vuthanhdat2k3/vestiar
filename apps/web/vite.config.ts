@@ -76,6 +76,7 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
+        '@vestiar/tryon-engine': path.resolve(__dirname, '../../packages/tryon-engine/src'),
       },
     },
     server: {
